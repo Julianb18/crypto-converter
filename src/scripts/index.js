@@ -9,7 +9,8 @@ const button = document.querySelector(`button`);
 const crypto = document.getElementById(`selectedCrypto`);
 const currency = document.getElementById(`selectedCurrency`);
 const baseUrl = `https://api.cryptonator.com/api/ticker`;
-const amountOfCrypto = document;
+let amountOfCrypto = document.querySelector(`.amountOfCrypto`);
+let costOfCrypto = document.querySelector(`.costOfCrypto`);
 
 button.addEventListener(`click`, e => {
   e.preventDefault();
@@ -24,7 +25,11 @@ button.addEventListener(`click`, e => {
       }
     })
     .then(data => {
-      console.log(data.ticker.price);
+      let price = data.ticker.price;
+      let convert = amountOfCrypto.value * price;
+      costOfCrypto.value = convert.toFixed(2);
+      console.log(amountOfCrypto.value * price);
+      // console.log(data.ticker.price);
     })
     .catch(e => {
       console.log(e);
