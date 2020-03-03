@@ -17,19 +17,19 @@ button.addEventListener(`click`, e => {
   const url = `${baseUrl}/${crypto.value}-${currency.value}`;
   console.log(url);
   fetch(url)
-    .then(res => {
-      if (res.ok) {
-        return res.json();
+    .then(response => {
+      if (response.ok) {
+        return response.json();
       } else {
-        throw new Error(`${res.status} ${res.statusText}`);
+        throw new Error(`${response.status} ${response.statusText}`);
       }
     })
     .then(data => {
       let price = data.ticker.price;
       let convert = amountOfCrypto.value * price;
       costOfCrypto.value = convert.toFixed(2);
+
       console.log(amountOfCrypto.value * price);
-      // console.log(data.ticker.price);
     })
     .catch(e => {
       console.log(e);
